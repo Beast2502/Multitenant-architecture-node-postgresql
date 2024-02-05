@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 
-const {dbSetup} = require('.');
+const dbSetup = require('./database.config');
+
 
 const sequelizeInstance = new Sequelize(
     dbSetup.database,

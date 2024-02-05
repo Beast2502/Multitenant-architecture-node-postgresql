@@ -1,10 +1,11 @@
-const constants = require('./constants.config');
+const config = require('./constants.config');
 
-const user = constants.DB.POSTGRES_USER;
-const password = constants.DB.POSTGRES_PASSWORD;
-const database = constants.DB.POSTGRES_DB;
-const host = constants.DB.POSTGRES_HOST;
-const dialect = constants.DB.DIALECT;
+
+const user = config.DB.POSTGRES_USER;
+const password = config.DB.POSTGRES_PASSWORD;
+const database = config.DB.POSTGRES_DB;
+const host = config.DB.POSTGRES_HOST;
+const dialect = config.DB.DIALECT;
 
 const databaseConnectionSetup = () =>{
     return{
