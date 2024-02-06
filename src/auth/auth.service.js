@@ -13,11 +13,11 @@ authService.registerTenant =  async function ({data}){
 
     if(userExist) throw new Error("User already exist!")
 
-    // const verify = await tenantRepo.generateSchema(data.schemaName);
+    const verify = await tenantRepo.generateSchema(data.schemaName);
 
     // "Attempt to generate schema and verify that it was created correctly."
 
-    // if(!verify) throw new Error("Schema could not be generated")
+    if(!verify) throw new Error("Schema could not be generated")
 
     const {userId}  = await signupRepo.createUserAccount(data)
 
