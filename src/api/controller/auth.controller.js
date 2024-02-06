@@ -5,16 +5,24 @@ const authService = require("../../auth/auth.service");
 const authController = {}
 
 authController.CreateTenant = [
-    async(req,res,next)=>{
+    async (req, res, next) => {
 
-        try{
+        try {
 
             // fullname , email,  password , schema_name
 
-            authService
+
+            console.log(req.body,"REQ")
+            const { msg } = await authService.registerTenant({ data: req.body });
 
 
-        }catch(err){
+
+            res.status(200).json({ msg })
+
+
+        } catch (err) {
+
+            res.status(400).json({msg : err.message})
 
         }
 
