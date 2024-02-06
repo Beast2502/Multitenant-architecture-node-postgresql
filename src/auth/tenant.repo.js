@@ -33,6 +33,8 @@ tenantRepo.registerTenant =async  schemaName =>{
 
 tenantRepo.bindSchemaToUser = async (userId , tenantId) =>{
 
+    console.log(userId ,tenantId )
+
     await TenantUserModel.create({
         fk_tenant : tenantId,
         fk_user : userId

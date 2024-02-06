@@ -7,14 +7,15 @@ const signupRepo = {}
 
 signupRepo.verifyAlreadyExist = async email =>{
    const user =  await UserAccountModel.findOne({where : {email}})
-   if(user) throw new Error ("User account already exists")
+
+   if(user) return true
+   return false;
 
 
 }
 
 signupRepo.createUserAccount = async data => {
 
-    console.log(data,"SIGN Up")
 
     const userDTO =  {
         fullName : data.fullname,
@@ -22,7 +23,9 @@ signupRepo.createUserAccount = async data => {
         password : await argon.hash(data.password)
     }
 
-    const user = UserAccountModel.create(userDTO);
+    const user = await UserAccountModel.create(userDTO);
+
+    console.log(user,"TEST USER CREATED")
 
     return {userId : user.id}
 
