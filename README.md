@@ -1,7 +1,7 @@
 # Multitenant-architecture-node-postgresql
 
 
-# Steps to configre the 
+# INTITIAL SETUP TO RUN THE CODE 
 
 1. SETUP ENV AS PER your system
 
@@ -23,4 +23,4 @@ SERVER_PORT = 3000
 
 
 2. make db in the postgres
-3. make 'accounts' schema 
+3. make 'accounts' schema
