@@ -1,9 +1,10 @@
+const { CustomerModel, initializeCustomerModel, CustomerAccountModel } = require("../models");
 const signupRepo = require("./signup.repo");
 const tenantRepo = require("./tenant.repo");
 
-const authService =  {}
+const authService = {}
 
-authService.registerTenant =  async function ({data}){
+authService.registerTenant = async function ({ data }) {
 
 
     // verify 
@@ -11,25 +12,36 @@ authService.registerTenant =  async function ({data}){
     const userExist = await signupRepo.verifyAlreadyExist(data.email);
 
 
-    if(userExist) throw new Error("User already exist!")
+    if (userExist) throw new Error("User already exist!")
 
     const verify = await tenantRepo.generateSchema(data.schemaName);
 
-    // "Attempt to generate schema and verify that it was created correctly."
 
-    if(!verify) throw new Error("Schema could not be generated")
+    if (!verify) throw new Error("Schema could not be generated")
 
-    const {userId}  = await signupRepo.createUserAccount(data)
+    const { userId } = await signupRepo.createUserAccount(data)
 
-    const {tenantId} = await tenantRepo.registerTenant(data.schemaName)
+    const { tenantId } = await tenantRepo.registerTenant(data.schemaName)
 
-    console.log(userId,tenantId,"BEFORE BINDING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
-    await tenantRepo.bindSchemaToUser(userId , tenantId)
+    console.log(userId, tenantId, "BEFORE BINDING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 
-    
+    await tenantRepo.bindSchemaToUser(userId, tenantId)
+    console.log(data, "REGISTER")
 
-    return {msg:'Tenant has been registered successfully' }
+    initializeCustomerModel(`tenant_${data.schemaName}`);
+   
+        
+        CustomerAccountModel.sync()
+            .then(() => {
+                console.log('User table created successfully');
+            })
+            .catch(error => {
+                console.error('Error creating user table:', error);
+            });
+
+
+    return { msg: 'Tenant has been registered successfully' }
 
 }
 

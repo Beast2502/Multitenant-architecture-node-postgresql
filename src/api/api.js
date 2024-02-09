@@ -1,6 +1,6 @@
 const authRouter = require('./routes/auth.router');
 const testRouter = require('./routes/test.router');
-
+const custRouter = require('./routes/cust.router');
 
 function api(){
     return[
@@ -12,6 +12,10 @@ function api(){
         {
             path : '/auth',
             controller : authRouter
+        },
+        {
+            path : '/customer',
+            controller : custRouter
         }
     ]
 

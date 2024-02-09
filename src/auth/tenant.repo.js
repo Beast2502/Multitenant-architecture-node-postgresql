@@ -13,7 +13,7 @@ tenantRepo.generateSchema = async schemaName =>{
     await sequelizeInstance.showAllSchemas({logging : false}).then(async data =>{
 
         if(!data.includes(schemaName)){
-            await sequelizeInstance.createSchema(schemaName)
+            await sequelizeInstance.createSchema(`tenant_${schemaName}`)
             schemaCreated = true;
         }
     }).catch(err => console.log(err))
@@ -39,6 +39,8 @@ tenantRepo.bindSchemaToUser = async (userId , tenantId) =>{
         fk_tenant : tenantId,
         fk_user : userId
     })
+
+    
 
 }
 

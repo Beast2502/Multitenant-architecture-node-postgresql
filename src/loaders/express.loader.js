@@ -17,10 +17,6 @@ module.exports = async function expressLoader(app,routes){
     app.use(cors({origin : '*'}));
     app.use(helmet());
 
-
-
-
-
     routes.forEach(r => {
         app.use(r.path , r.controller)
     });

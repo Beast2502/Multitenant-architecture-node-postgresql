@@ -3,10 +3,6 @@ const { TenantUserModel , UserAccountModel , TenanatModel} = require("../models"
 module.exports  = async function sequelizeLoader(sequelizeInstance){
     if(!sequelizeInstance) throw new Error('Error, sequelize instance is null or undefined ')
 
-    
-    console.log("Checking TenanatModel.hasMany...");
-    console.log(typeof TenanatModel, typeof TenantUserModel);
-    
     // Tenant Model
     TenanatModel.hasMany(TenantUserModel ,{foreignKey : 'fk_tenant' , onDelete : 'RESTRICT'})
 
